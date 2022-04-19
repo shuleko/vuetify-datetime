@@ -54,7 +54,6 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {},
     "overrides": [
       {
         "files": [
@@ -65,7 +64,11 @@
           "jest": true
         }
       }
-    ]
+    ],
+    "rules": {
+      "no-unused-vars": "warn",
+      "comma-dangle": "off"
+    }
   },
   "browserslist": [
     "> 1%",

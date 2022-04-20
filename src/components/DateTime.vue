@@ -11,7 +11,7 @@
     <template #activator="{on}">
       <v-text-field
         v-model="date"
-        label="Picker without buttons"
+        :label="label"
         prepend-inner-icon="mdi-calendar-blank-outline"
         @click:prepend-inner="on.click"
       ></v-text-field>
@@ -29,8 +29,36 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'DateTime',
 
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+
+  props: {
+    value: {
+      type: String || null,
+      default: null,
+    },
+    label: {
+      type: String || null,
+      default: null,
+    },
+  },
+
+  computed: {
+    date: {
+      get (): string | null {
+        return this.value
+      },
+      set (value : string | null) {
+        console.log('date set', value)
+        this.$emit('change', value)
+      }
+    },
+  },
+
   data: () => ({
-    date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substring(0, 10),
+    // date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substring(0, 10),
     menu: false,
   }),
 
